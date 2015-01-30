@@ -10,6 +10,7 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
   - ~~Movement~~
   - ~~Rotation~~
   - ~~Scaling~~
+  - ~~Deletion~~
   - **Copy/paste**
 - **Images**
   - ~~Background maps~~
