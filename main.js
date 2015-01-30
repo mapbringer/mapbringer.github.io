@@ -3,6 +3,7 @@
 init()
 
 function init() {
+	initReadme()
 	initCanvas()
 	initTools()
 
@@ -439,6 +440,33 @@ function init() {
 				success: function(result) {
 					var id = result.data.id
 					window.open('https://imgur.com/gallery/' + id, '_blank')
+				}
+			})
+		}
+	}
+
+	function initReadme() {
+		$.ajax({
+			url: 'README.md',
+			method: 'GET',
+			headers: {
+				Accept: 'text/plain'
+			},
+			success: convertMarkdown
+		})
+
+		function convertMarkdown(markdown) {
+			$.ajax({
+				url: 'https://api.github.com/markdown',
+				method: 'POST',
+				headers: {
+					Accept: 'text/plain'
+				},
+				data: {
+					text: 'Cool'
+				},
+				success: function(result) {
+					$('#readme').html(result)
 				}
 			})
 		}
