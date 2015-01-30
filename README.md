@@ -13,7 +13,7 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
   - **Copy/paste**
 - **Images**
   - ~~Background maps~~
-  - **Drag-and-drop sigils**
+  - **House/character sigils**
     - Waiting on permission from /u/Other-in-Law
   - **User-defined images**
 - ~~Text~~
