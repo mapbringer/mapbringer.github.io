@@ -45,6 +45,11 @@ overflow-x: visible !important;
 	border-left: 1px solid black;
 	padding: 5px;
 	/*overflow-x: hidden;*/
+	overflow-y: auto;
+}
+
+#readme h1 {
+	font-size: 24px;
 }
 
 #canvas {
