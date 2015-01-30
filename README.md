@@ -1,4 +1,4 @@
-# mapbringer.github.io
+# Mapbringer
 
 Mapbringer is an open source gift to the fan community of George R. R. Martin's epic fantasy series *A Song of Ice and Fire* and HBO's television adaptation *Game of Thrones*. It was initially created by /u/ser_dunk_the_lunk of the /r/asoiaf subreddit, and continued development is open to all.
 
