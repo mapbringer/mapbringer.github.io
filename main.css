@@ -1,0 +1,69 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+#main-container {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+#left-pane {
+	height: 100%;
+	width: 300px;
+	max-width: 300px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-right: 1px solid black;
+	padding: 5px;
+	/*overflow-x: visible;*/
+	overflow-y: auto;
+}
+
+/*#left-pane, #left-pane div {
+overflow-x: visible !important;
+}*/
+
+#center-pane {
+	height: 100%;
+	width: calc(100% - 600px);
+	position: absolute;
+	top: 0;
+	left: 300px;
+	overflow: auto;
+}
+
+#right-pane {
+	height: 100%;
+	width: 300px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-left: 1px solid black;
+	padding: 5px;
+	/*overflow-x: hidden;*/
+}
+
+#canvas {
+	width: 500px;
+	height: 500px;
+}
+
+#sigils img {
+	width: 100px;
+}
+
+#symbols .btn {
+	width: 100%;
+}
+
+#symbols .btn:not(:last-child) {
+	margin-bottom: 5px;
+}
+
+#right-pane .info:not(.general) {
+	display: none;
+}

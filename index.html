@@ -1,1 +1,186 @@
-Initial test page
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Mapbringer</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.0.1/css/bootstrap-colorpicker.min.css"></script>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div id="main-container">
+		<div id="left-pane">
+			<div class="panel-group" id="accordion" role="tablist">
+				<div class="panel panel-default" id="map-backgrounds">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+								Map Backgrounds
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse" role="tabpanel">
+						<div class="panel-body">
+							<img src="img/maps/known_world.png"     title="The Known World"  class="img-thumbnail" data-width="1300" data-zIndex="0">
+							<img src="img/maps/westeros.png"        title="Westeros"         class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/beyond_the_wall.jpg" title="Beyond the Wall"  class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/the_north.jpg"       title="The North"        class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/the_vale.jpg"        title="The Vale"         class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/the_riverlands.png"  title="The Riverlands"   class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/iron_islands.jpg"    title="The Iron Islands" class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/the_westerlands.png" title="The Westerlands"  class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/the_crownlands.png"  title="The Crownlands"   class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/the_stormlands.png"  title="The Stormlands"   class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/the_reach.png"       title="The Reach"        class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/dorne.png"           title="Dorne"            class="img-thumbnail" data-height="950" data-zIndex="0">
+							<img src="img/maps/free_cities.png"     title="The Free Cities"  class="img-thumbnail" data-height="950" data-zIndex="0">
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default" id="sigils">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+								Sigils
+							</a>
+						</h4>
+					</div>
+					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel">
+						<div class="panel-body">
+							<img src="img/sigils/iron_islands/euron_greyjoy.png" title="Euron Greyjoy" class="img-thumbnail" data-width="50" data-zIndex="100">
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default" id="symbols">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+								Symbols and Miscellaneous
+							</a>
+						</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel">
+						<div class="panel-body">
+							<button class="btn btn-primary" id="add-line"  >Add line</button>
+							<button class="btn btn-primary" id="add-circle">Add circle</button>
+							<button class="btn btn-primary" id="add-text"  >Add text</button>
+							<button class="btn btn-primary" id="free-draw" >Free draw</button>
+						</div>`
+					</div>
+				</div>
+			</div>
+		</div> <!-- end left-pane -->
+
+		<div id="center-pane">
+			<canvas id="canvas" width="1920" height="1080"></canvas>
+		</div>
+
+		<div id="right-pane">
+			<div class="general info">
+				<h2 class="title">General Info</h2>
+				<p>This right panel shows context-dependent information and options based on what's selected. Go ahead and try it out.</p>
+				<button class="btn btn-primary" id="imgur-export">Export to imgur</button>
+			</div>
+			<div class="text info">
+				<h2 class="title">Text</h2>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">zIndex</label>
+						<div class="col-sm-6">
+							<input type="number" step="1" value="" class="form-control" id="text-info-zindex" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Value</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" id="text-info-value"></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Align</label>
+						<div class="col-sm-10">
+							<div class="btn-group" data-toggle="buttons" id="text-info-align">
+								<label class="btn btn-default active">
+									<input type="radio" name="text-info-align" value="left" checked> Left
+								</label>
+								<label class="btn btn-default">
+									<input type="radio" name="text-info-align" value="center"> Center
+								</label>
+								<label class="btn btn-default">
+									<input type="radio" name="text-info-align" value="right"> Right
+								</label>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Font</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="text-info-font" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Stroke Width</label>
+						<div class="col-sm-6">
+							<input type="number" step="0.5" value="1" class="form-control" id="text-info-stroke-width" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Stroke Color</label>
+						<div class="col-sm-6">
+							<div class="input-group color-input">
+								<input type="text" value="" class="form-control" id="text-info-stroke-color" placeholder="hex code" />
+								<span class="input-group-addon"><i></i></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Fill Color</label>
+						<div class="col-sm-6">
+							<div class="input-group color-input">
+								<input type="text" value="" class="form-control" id="text-info-fill-color" placeholder="hex code" />
+								<span class="input-group-addon"><i></i></span>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="path info">
+				<h2 class="title">Free Draw Path</h2>
+			</div>
+			<div class="line info">
+				<h2 class="title">Line</h2>
+			</div>
+			<div class="image info">
+				<h2 class="title">Image</h2>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.0.1/js/bootstrap-colorpicker.js"></script>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.4.13/fabric.js"></script>
+
+	<script src="main.js"></script>
+
+</body>
+</html>
