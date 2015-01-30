@@ -15,6 +15,7 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
   - ~~Background maps~~
   - **Drag-and-drop sigils**
     - Waiting on permission from /u/Other-in-Law
+  - **User-defined images**
 - ~~Text~~
   - ~~Placement~~
   - ~~Value editing~~
