@@ -463,7 +463,7 @@ function init() {
 					Accept: 'application/json'
 				},
 				data: JSON.stringify({
-					text: 'Cool'
+					text: markdown
 				}),
 				success: function(result) {
 					$('#readme').html(result)
