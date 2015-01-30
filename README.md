@@ -6,47 +6,47 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 
 # Feature status
 
-- **Generic object behaviors**
-  - ~~Movement~~
-  - ~~Rotation~~
-  - ~~Scaling~~
-  - ~~Deletion~~
-  - **Copy/paste**
-- **Images**
-  - ~~Background maps~~
-  - **House/character sigils**
-    - Waiting on permission from /u/Other-in-Law
-  - **User-defined images**
-- ~~Text~~
-  - ~~Placement~~
-  - ~~Value editing~~
-  - ~~Colors~~
-  - ~~Stroke width~~
-  - ~~Font selection~~
-- **Lines**
-  - ~~Placement~~
-  - ~~Vertex movement~~
-  - ~~Vertex deletion~~
-  - **Dashed/solid mode**
-  - **Stroke width**
-  - **Colors**
-  - **Arrows**
-  - **Group movement**
-- **Free draw mode**
-  - ~~Placement~~
-  - **Dashed/solid mode**
-  - **Stroke width**
-  - **Colors**
-- **Circles**
-  - **Placement**
-  - **Dashed/solid mode**
-  - **Stroke width**
-  - **Colors**
-- **Import/export**
-  - **JSON export**
-  - **JSON import**
-  - **Imgur export**
-- **Map metadata (name, authors, date, etc)**
+- [ ] Generic object behaviors
+	- [x] Movement
+	- [x] Rotation
+	- [x] Scaling
+	- [x] Deletion
+	- [ ] Copy/paste
+- [ ] Images
+	- [x] Background maps
+	- [ ] House/character sigils
+		- Waiting on permission from /u/Other-in-Law
+	- [ ] User-defined images
+- [x] Text
+	- [x] Placement
+	- [x] Value editing
+	- [x] Colors
+	- [x] Stroke width
+	- [x] Font selection
+- [ ] Lines
+	- [x] Placement
+	- [x] Vertex movement
+	- [x] Vertex deletion
+	- [ ] Dashed/solid mode
+	- [ ] Stroke width
+	- [ ] Colors
+	- [ ] Arrows
+	- [ ] Group movement
+- [ ] Free draw mode
+	- [x] Placement
+	- [ ] Dashed/solid mode
+	- [ ] Stroke width
+	- [ ] Colors
+- [ ] Circles
+	- [ ] Placement
+	- [ ] Dashed/solid mode
+	- [ ] Stroke width
+	- [ ] Colors
+- [ ] Import/export
+	- [ ] JSON export
+	- [ ] JSON import
+	- [ ] Imgur export
+- [ ] Map metadata (name, authors, date, etc)
 
 # Contributing
 
