@@ -460,11 +460,11 @@ function init() {
 				url: 'https://api.github.com/markdown',
 				method: 'POST',
 				headers: {
-					Accept: 'text/plain'
+					Accept: 'application/json'
 				},
-				data: {
+				data: JSON.stringify({
 					text: 'Cool'
-				},
+				}),
 				success: function(result) {
 					$('#readme').html(result)
 				}
