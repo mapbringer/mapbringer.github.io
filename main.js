@@ -46,49 +46,54 @@ function init() {
 		$('#add-line'  ).on('click', addLine)
 		$('#add-circle').on('click', addCircle)
 		$('#add-text'  ).on('click', addText)
-		$('#free-draw' ).on('click', freeDraw)
+		$('#draw-path' ).on('click', drawPath)
 
 		$('#imgur-export').on('click', exportToImgur)
 
-		// Info panes
+		// Text info
 		$('#text-info-zindex'       ).on('change', onTextInfoZindexChange)
 		$('#text-info-value'        ).on('change', onTextInfoValueChange)
 		$('[name="text-info-align"]').on('change', onTextInfoAlignChange)
 		$('#text-info-font'         ).on('change', onTextInfoFontChange)
 		$('#text-info-stroke-width' ).on('change', onTextInfoStrokeWidthChange)
-		//$('#text-info-stroke-color' ).on('change', onTextInfoStrokeColorChange)
-		//$('#text-info-fill-color'   ).on('change', onTextInfoFillColorChange)
 		$('#text-info-stroke-color' ).parent().colorpicker().on('changeColor', onTextInfoStrokeColorChange)
 		$('#text-info-fill-color'   ).parent().colorpicker().on('changeColor', onTextInfoFillColorChange)
+
+		// Line info
+		$('#line-info-zindex'      ).on('change', onLineInfoZindexChange)
+		$('[name="line-info-type"]').on('change', onLineInfoTypeChange)
+		$('#line-info-stroke-width').on('change', onLineInfoStrokeWidthChange)
+		$('#line-info-stroke-color').parent().colorpicker().on('changeColor', onLineInfoStrokeColorChange)
+
+		// Path info
+		$('#path-info-zindex'      ).on('change', onPathInfoZindexChange)
+		$('[name="path-info-type"]').on('change', onPathInfoTypeChange)
+		$('#path-info-stroke-width').on('change', onPathInfoStrokeWidthChange)
+		$('#path-info-stroke-color').parent().colorpicker().on('changeColor', onPathInfoStrokeColorChange)
 
 		function onKeyDownHandler(e) {
 			var regex = /INPUT|SELECT|TEXTAREA/i
 
 			switch (e.keyCode) {
-				case 46: // delete
-					// Disregard the Delete key if we're in an input field
-					if (regex.test(e.target.tagName)) {
-						return
-					}
-
-					if (window.canvas.getActiveGroup()) {
-						window.canvas.getActiveGroup().forEachObject(function(o) {window.canvas.remove(o)})
-						window.canvas.discardActiveGroup().renderAll()
-					}
-					else {
-						window.canvas.remove(window.canvas.getActiveObject())
-					}
-					break
-
-				case 8: // backspace
-					// Stop the default behavior for Backspace if we're:
+				case 8: // delete
+				case 46: // backspace
+					// Stop the default behavior for Backspace/Delete if we're:
 					//     A) not on an input field,
 					//     B) on a disabled input field, or
 					//     C) on a read-only input field.
 					// The default behavior is to navigate back, which is bad.
 					if (!regex.test(e.target.tagName) || e.target.disabled || e.target.readOnly) {
+						if (window.canvas.getActiveGroup()) {
+							window.canvas.getActiveGroup().forEachObject(function(o) {window.canvas.remove(o)})
+							window.canvas.discardActiveGroup().renderAll()
+						}
+						else {
+							window.canvas.remove(window.canvas.getActiveObject())
+						}
+
 						e.preventDefault()
 					}
+
 					break
 
 				default:
@@ -110,8 +115,12 @@ function init() {
 
 				imageObject.set('left', ui.offset.left - canvasOffset.left).set('top', ui.offset.top - canvasOffset.top)
 
-				var instanceData = {title: $(ui.draggable).attr('title')}
-				imageObject.set('instanceData', instanceData)
+				var extraData = {title: $(ui.draggable).attr('title')}
+				imageObject.set('extraData', extraData)
+
+				if (extraData.zIndex !== 0) {
+					imageObject.setShadow('5px 5px 15px rgba(0,0,0,0.4)')
+				}
 
 				window.canvas.add(imageObject).setActiveObject(imageObject)
 			})
@@ -119,7 +128,7 @@ function init() {
 
 		function onSelect(e) {
 			var obj = e.target
-			var data = obj.get('instanceData') || {}
+			var extraData = obj.get('extraData') || {}
 
 			// Hide all info sections
 			$rightPane.find('.info').hide()
@@ -128,6 +137,13 @@ function init() {
 			switch (obj.type) {
 				case 'path':
 					var $pathInfo = $rightPane.find('.path.info')
+					$pathInfo.data('obj', obj)
+
+					$pathInfo.find('#path-info-zindex').val(obj.zIndex)
+					$pathInfo.find('#path-info-stroke-width').val(obj.strokeWidth)
+					$pathInfo.find('#path-info-stroke-color').val(obj.stroke)
+					$pathInfo.find('#path-info-stroke-color').parent().colorpicker('setValue', obj.stroke)
+					$pathInfo.find('[name="path-info-type"]').parent().removeClass('active').find('[value="'+obj.pathType+'"]').prop('checked', true).parent().addClass('active') // jesus
 
 					$pathInfo.show()
 					break
@@ -152,13 +168,51 @@ function init() {
 				case 'image':
 					var $imageInfo = $rightPane.find('.image.info')
 
-					$imageInfo.find('.title').text(data.title || 'Image')
+					$imageInfo.find('.title').text(extraData.title || 'Image')
 
 					$imageInfo.show()
 					break
 
+				case 'circle':
+					var $lineInfo = $rightPane.find('.line.info')
+
+					// Instead of pointing to just one object, it's an array of lines
+					var objs = getLinesFromPoint(obj)
+					$lineInfo.data('objs', objs)
+
+					var firstObj = objs[0]
+
+					$lineInfo.find('#line-info-zindex').val(firstObj.zIndex)
+					$lineInfo.find('#line-info-stroke-width').val(firstObj.strokeWidth)
+					$lineInfo.find('#line-info-stroke-color').val(firstObj.stroke)
+					$lineInfo.find('#line-info-stroke-color').parent().colorpicker('setValue', firstObj.stroke)
+					$lineInfo.find('[name="line-info-type"]').parent().removeClass('active').find('[value="'+firstObj.lineType+'"]').prop('checked', true).parent().addClass('active') // jesus
+
+					$lineInfo.show()
+
+					break
+
 				default:
 					break
+			}
+
+			function getLinesFromPoint(point) {
+				var objs = []
+				var origPoint = point
+
+				while (point.leftLine) {
+					objs.push(point.leftLine)
+					point = point.leftLine.leftPoint
+				}
+
+				point = origPoint
+
+				while (point.rightLine) {
+					objs.push(point.rightLine)
+					point = point.rightLine.rightPoint
+				}
+
+				return objs
 			}
 		}
 
@@ -168,18 +222,31 @@ function init() {
 		}
 
 		function onMoving(data) {
-			if (data.target.rightLine) {
-				data.target.rightLine.set('x1', data.target.left + data.target.radius)
-				data.target.rightLine.set('y1', data.target.top  + data.target.radius)
-				data.target.rightLine.set('left', Math.min(data.target.rightLine.x1, data.target.rightLine.x2))
-				data.target.rightLine.set('top',  Math.min(data.target.rightLine.y1, data.target.rightLine.y2))
+			if (data.target.objects) {
+				for (var i = 0; i < data.target.objects.length; i++) {
+					var absLeft = data.target.left + (data.target.width  / 2) + data.target.objects[i].left
+					var absTop  = data.target.top  + (data.target.height / 2) + data.target.objects[i].top
+					checkObjectForLines(data.target.objects[i], absLeft, absTop)
+				}
+			}
+			else {
+				checkObjectForLines(data.target, data.target.left, data.target.top)
 			}
 
-			if (data.target.leftLine) {
-				data.target.leftLine.set('x2', data.target.left + data.target.radius)
-				data.target.leftLine.set('y2', data.target.top  + data.target.radius)
-				data.target.leftLine.set('left', Math.min(data.target.leftLine.x1, data.target.leftLine.x2))
-				data.target.leftLine.set('top',  Math.min(data.target.leftLine.y1, data.target.leftLine.y2))
+			function checkObjectForLines(obj, left, top) {
+				if (obj.rightLine) {
+					obj.rightLine.set('x1', left + obj.radius)
+					obj.rightLine.set('y1', top  + obj.radius)
+					obj.rightLine.set('left', Math.min(obj.rightLine.x1, obj.rightLine.x2))
+					obj.rightLine.set('top',  Math.min(obj.rightLine.y1, obj.rightLine.y2))
+				}
+
+				if (obj.leftLine) {
+					obj.leftLine.set('x2', left + obj.radius)
+					obj.leftLine.set('y2', top  + obj.radius)
+					obj.leftLine.set('left', Math.min(obj.leftLine.x1, obj.leftLine.x2))
+					obj.leftLine.set('top',  Math.min(obj.leftLine.y1, obj.leftLine.y2))
+				}
 			}
 		}
 
@@ -226,10 +293,14 @@ function init() {
 						point.getCenterPoint().x, point.getCenterPoint().y
 					], {
 						stroke: '#000000',
+						strokeLineCap: 'round',
+						strokeWidth: 1,
 						left: Math.min(lastPoint.getCenterPoint().x, point.getCenterPoint().x),
 						top: Math.min(lastPoint.getCenterPoint().y, point.getCenterPoint().y),
 						selectable: false,
-						zIndex: 500
+						zIndex: 500,
+						lineType: 'solid',
+						shadow: '2px 2px 10px rgba(0,0,0,0.4)'
 					})
 
 					line.on('removed', onLineRemoval)
@@ -328,22 +399,25 @@ function init() {
 			// TBD
 		}
 
-		function freeDraw() {
+		function drawPath() {
 			window.canvas.isDrawingMode = true
 			window.canvas.freeDrawingMode = 'Pencil'
 
-			$('#free-draw').addClass('btn-danger disabled').text('Right click to end')
+			$('#draw-path').addClass('btn-danger disabled').text('Right click to end')
 
-			$canvas.on('contextmenu', endFreeDraw)
+			$canvas.on('contextmenu', endPathDraw)
 
-			function endFreeDraw() {
+			function endPathDraw() {
 				window.canvas.isDrawingMode = false
-				$canvas.off('contextmenu', endFreeDraw)
-				$('#free-draw').removeClass('btn-danger disabled').text('Free draw')
+				$canvas.off('contextmenu', endPathDraw)
+				$('#draw-path').removeClass('btn-danger disabled').text('Draw path')
 
 				var objs = canvas.getObjects()
 				var obj = objs[objs.length - 1]
 				obj.set('zIndex', 500)
+				obj.set('strokeLineCap', 'round')
+				obj.set('pathType', 'solid')
+				obj.setShadow('2px 2px 10px rgba(0,0,0,0.4)')
 				canvas.setActiveObject(obj)
 
 				return false
@@ -372,7 +446,8 @@ function init() {
 					fill: '#000000',
 					hasRotatingPoint: true,
 					centerTransform: true,
-					zIndex: 500
+					zIndex: 500,
+					shadow: '2px 2px 15px rgba(0,0,0,0.2)'
 				})
 
 				canvas.add(text).setActiveObject(text)
@@ -420,6 +495,110 @@ function init() {
 
 		function onTextInfoFillColorChange(e) {
 			$rightPane.find('.text.info').data('obj').set('fill', e.value || e.color.toHex())
+			window.canvas.renderAll()
+		}
+
+		function onLineInfoZindexChange() {
+			var self = this
+			_.forEach($rightPane.find('.line.info').data('objs'), function(value, key) {
+				value.set('zIndex', $(self).val() * 1)
+			})
+
+			// TODO: sort canvas objects
+			window.canvas.renderAll()
+		}
+
+		function onLineInfoTypeChange() {
+			var strokeDashArray = []
+			var lineType = $(this).val()
+			var objs = $rightPane.find('.line.info').data('objs')
+			var strokeWidth = objs[0].strokeWidth || 1
+
+			switch (lineType) {
+				case 'dotted':
+					strokeDashArray = [strokeWidth / 2, strokeWidth * 4]
+					break
+
+				case 'dashed':
+					strokeDashArray = [strokeWidth * 4, strokeWidth * 4]
+					break
+
+				case 'solid':
+				default:
+					break
+			}
+
+			_.forEach(objs, function(value, key) {
+				value.set('lineType', lineType)
+				value.set('strokeDashArray', strokeDashArray)
+			})
+			
+			window.canvas.renderAll()
+		}
+
+		function onLineInfoStrokeWidthChange() {
+			var self = this
+			_.forEach($rightPane.find('.line.info').data('objs'), function(value, key) {
+				value.set('strokeWidth', $(self).val() * 1)
+			})
+
+			onLineInfoTypeChange.call($rightPane.find('[name="line-info-type"]:checked').get(0))
+
+			window.canvas.renderAll()
+		}
+
+		function onLineInfoStrokeColorChange(e) {
+			_.forEach($rightPane.find('.line.info').data('objs'), function(value, key) {
+				value.set('stroke', e.value || e.color.toHex())
+			})
+
+			window.canvas.renderAll()
+		}
+
+		function onPathInfoZindexChange() {
+			$rightPane.find('.path.info').data('obj').set('zIndex', $(this).val() * 1)
+
+			// TODO: sort canvas objects
+			window.canvas.renderAll()
+		}
+
+		function onPathInfoTypeChange() {
+			var strokeDashArray = []
+			var pathType = $(this).val()
+			var obj = $rightPane.find('.path.info').data('obj')
+			var strokeWidth = obj.strokeWidth || 1
+
+			switch (pathType) {
+				case 'dotted':
+					strokeDashArray = [strokeWidth / 2, strokeWidth * 4]
+					break
+
+				case 'dashed':
+					strokeDashArray = [strokeWidth * 4, strokeWidth * 4]
+					break
+
+				case 'solid':
+				default:
+					break
+			}
+
+			$rightPane.find('.path.info').data('obj').set('pathType', pathType)
+			$rightPane.find('.path.info').data('obj').set('strokeDashArray', strokeDashArray)
+			
+			window.canvas.renderAll()
+		}
+
+		function onPathInfoStrokeWidthChange() {
+			$rightPane.find('.path.info').data('obj').set('strokeWidth', $(this).val() * 1)
+
+			onPathInfoTypeChange.call($rightPane.find('[name="path-info-type"]:checked').get(0))
+
+			window.canvas.renderAll()
+		}
+
+		function onPathInfoStrokeColorChange(e) {
+			$rightPane.find('.path.info').data('obj').set('stroke', e.value || e.color.toHex())
+
 			window.canvas.renderAll()
 		}
 

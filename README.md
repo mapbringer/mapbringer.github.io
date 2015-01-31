@@ -10,7 +10,7 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 
 # Feature status
 
-- [ ] Generic object behaviors
+- [x] Generic object behaviors
 	- [x] Movement
 	- [x] Rotation
 	- [x] Scaling
@@ -27,20 +27,20 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 	- [x] Colors
 	- [x] Stroke width
 	- [x] Font selection
-- [ ] Lines
+- [x] Lines
 	- [x] Placement
 	- [x] Vertex movement
 	- [x] Vertex deletion
-	- [ ] Dashed/solid mode
-	- [ ] Stroke width
-	- [ ] Colors
+	- [x] Dashed/dotted/solid mode
+	- [x] Stroke width
+	- [x] Colors
 	- [ ] Arrows
-	- [ ] Group movement
-- [ ] Free draw mode
+	- [x] Group movement
+- [x] Free draw mode
 	- [x] Placement
-	- [ ] Dashed/solid mode
-	- [ ] Stroke width
-	- [ ] Colors
+	- [x] Dashed/dotted/solid mode
+	- [x] Stroke width
+	- [x] Colors
 - [ ] Circles
 	- [ ] Placement
 	- [ ] Dashed/solid mode
@@ -49,7 +49,8 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 - [ ] Import/export
 	- [ ] JSON export
 	- [ ] JSON import
-	- [ ] Imgur export
+	- [x] imgur export
+		- [ ] Cropped imgur export
 - [ ] Map metadata (name, authors, date, etc)
 
 # Contributing
