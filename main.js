@@ -653,7 +653,7 @@ function init() {
 		function importFromJson() {
 			var json = window.prompt('Paste JSON here:')
 
-			window.canvas.loadFromJson(json, window.canvas.renderAll.bind(window.canvas))
+			window.canvas.loadFromJSON(json, window.canvas.renderAll.bind(window.canvas))
 		}
 	}
 
