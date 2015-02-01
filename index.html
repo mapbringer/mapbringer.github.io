@@ -19,12 +19,12 @@
 				<div class="panel panel-default" id="map-backgrounds">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+							<a data-toggle="collapse" data-parent="#accordion" href="#maps-collapse">
 								Map Backgrounds
 							</a>
 						</h4>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse" role="tabpanel">
+					<div id="maps-collapse" class="panel-collapse collapse" role="tabpanel">
 						<div class="panel-body">
 							<img src="img/maps/known_world.png"     title="The Known World"  class="img-thumbnail" data-width="1300" data-zIndex="0">
 							<img src="img/maps/westeros.png"        title="Westeros"         class="img-thumbnail" data-height="950" data-zIndex="0">
@@ -46,14 +46,215 @@
 				<div class="panel panel-default" id="sigils">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title">
-							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#sigils-collapse">
 								Sigils
 							</a>
 						</h4>
 					</div>
-					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel">
+					<div id="sigils-collapse" class="panel-collapse collapse" role="tabpanel">
 						<div class="panel-body">
-							<img src="img/sigils/iron_islands/euron_greyjoy.png" title="Euron Greyjoy" class="img-thumbnail" data-width="50" data-zIndex="100">
+							<div class="panel-group" id="sigil-accordion" role="tablist">
+								<div class="panel panel-default" id="sigils-north">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-north-collapse">
+												The North
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-north-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/north/stark.png" title="House Stark" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/bolton.png" title="House Bolton" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/karstark.png" title="House Karstark" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/umber.png" title="House Umber" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/manderly.png" title="House Manderly" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/mormont.png" title="House Mormont" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/reed.png" title="House Reed" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/dustin.png" title="House Dustin" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/north/thenn.png" title="House Thenn" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-riverlands">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-riverlands-collapse">
+												The Riverlands
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-riverlands-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/riverlands/tully.png" title="House Tully" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/riverlands/frey.png" title="House Frey" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/riverlands/baelish_harrenhal.png" title="House Baelish of Harrenhal" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/riverlands/blackwood.png" title="House Blackwood" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/riverlands/bracken.png" title="House Bracken" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-vale">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-vale-collapse">
+												The Vale
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-vale-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/vale/arryn.png" title="House Arryn" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/vale/royce.png" title="House Royce of Runestone" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/vale/royce_gates_moon.png" title="House Royce of the Gates of the Moon" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/vale/corbray.png" title="House Corbray" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/vale/baelish_fingers.png" title="House Baelish of the Fingers" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-iron-islands">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-iron-islands-collapse">
+												The Iron Islands
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-iron-islands-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/iron_islands/greyjoy.png" title="House Greyjoy" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-westerlands">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-westerlands-collapse">
+												The Westerlands
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-westerlands-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/westerlands/lannister.png" title="House Lannister" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/westerlands/clegane.png" title="House Clegane" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/westerlands/marbrand.png" title="House Marbrand" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/westerlands/westerling.png" title="House Westerling" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/westerlands/payne.png" title="House Payne" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-crownlands">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-crownlands-collapse">
+												The Crownlands
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-crownlands-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/crownlands/baratheon_kings_landing.png" title="House Baratheon of Kings Landing" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/crownlands/baratheon_dragonstone.png" title="House Baratheon of Dragonstone" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/crownlands/targaryen.png" title="House Targaryen" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/crownlands/blackfyre.png" title="House Blackfyre" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/crownlands/velaryon.png" title="House Velaryon" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-stormlands">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-stormlands-collapse">
+												The Stormlands
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-stormlands-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/stormlands/baratheon_storms_end.png" title="House Baratheon" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/stormlands/tarth.png" title="House Tarth" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/stormlands/seaworth.png" title="House Seaworth" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/stormlands/connington.png" title="House Connington" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-reach">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-reach-collapse">
+												The Reach
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-reach-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/reach/tyrell.png" title="House Tyrell" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/reach/hightower.png" title="House Hightower" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/reach/tarly.png" title="House Tarly" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/reach/redwyne.png" title="House Redwyne" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/reach/merryweather.png" title="House Merryweather" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-dorne">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-dorne-collapse">
+												Dorne
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-dorne-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/dorne/martell.png" title="House Martell" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/dorne/dayne.png" title="House Dayne" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-personal">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-personal-collapse">
+												Personal Standards
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-personal-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/personal/bloodraven.png" title="Bloodraven" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/personal/euron_greyjoy.png" title="Euron Greyjoy" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+
+								<div class="panel panel-default" id="sigils-orders">
+									<div class="panel-heading" role="tab">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#sigil-accordion" href="#sigils-orders-collapse">
+												Knightly Orders
+											</a>
+										</h4>
+									</div>
+									<div id="sigils-orders-collapse" class="panel-collapse collapse" role="tabpanel">
+										<div class="panel-body">
+											<img src="img/sigils/orders/kingsguard.png" title="Kingsguard" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/orders/nights_watch.png" title="Night's Watch" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/orders/warriors_sons.png" title="Warrior's Sons" class="img-thumbnail" data-width="50" data-zIndex="100">
+											<img src="img/sigils/orders/poor_fellows.png" title="Poor Fellows" class="img-thumbnail" data-width="50" data-zIndex="100">
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -61,12 +262,12 @@
 				<div class="panel panel-default" id="symbols">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title">
-							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#symbols-collapse">
 								Symbols and Miscellaneous
 							</a>
 						</h4>
 					</div>
-					<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel">
+					<div id="symbols-collapse" class="panel-collapse collapse" role="tabpanel">
 						<div class="panel-body">
 							<button class="btn btn-primary" id="add-line"  >Add line</button>
 							<!-- <button class="btn btn-primary" id="add-circle">Add circle</button> -->
