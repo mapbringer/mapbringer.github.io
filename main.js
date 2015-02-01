@@ -640,12 +640,12 @@ function init() {
 					public: true,
 					files: {
 						'map.json': {
-							content: window.encodeURI(json)
+							content: json
 						}
 					}
 				}),
 				success: function(result) {
-					window.open(result.url, '_gist')
+					window.open(result.html_url, '_gist')
 				}
 			})
 		}
