@@ -640,7 +640,7 @@ function init() {
 					public: true,
 					files: {
 						'map.json': {
-							content: json
+							content: window.encodeURI(json)
 						}
 					}
 				}),
