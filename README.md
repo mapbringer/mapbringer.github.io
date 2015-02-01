@@ -19,7 +19,6 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 - [ ] Images
 	- [x] Background maps
 	- [ ] House/character sigils
-		- Waiting on permission from /u/Other-in-Law
 	- [ ] User-defined images
 - [x] Text
 	- [x] Placement

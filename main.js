@@ -48,7 +48,10 @@ function init() {
 		$('#add-text'  ).on('click', addText)
 		$('#draw-path' ).on('click', drawPath)
 
+		// Import/export tools
 		$('#imgur-export').on('click', exportToImgur)
+		$('#json-export').on('click', exportToJson)
+		$('#json-import').on('click', importFromJson)
 
 		// Text info
 		$('#text-info-zindex'       ).on('change', onTextInfoZindexChange)
@@ -516,7 +519,7 @@ function init() {
 
 			switch (lineType) {
 				case 'dotted':
-					strokeDashArray = [strokeWidth / 2, strokeWidth * 4]
+					strokeDashArray = [strokeWidth / 4, strokeWidth * 4]
 					break
 
 				case 'dashed':
@@ -570,7 +573,7 @@ function init() {
 
 			switch (pathType) {
 				case 'dotted':
-					strokeDashArray = [strokeWidth / 2, strokeWidth * 4]
+					strokeDashArray = [strokeWidth / 4, strokeWidth * 4]
 					break
 
 				case 'dashed':
@@ -618,9 +621,39 @@ function init() {
 				},
 				success: function(result) {
 					var id = result.data.id
-					window.open('https://imgur.com/gallery/' + id, '_blank')
+					window.open('https://imgur.com/gallery/' + id, '_imgur')
 				}
 			})
+		}
+
+		function exportToJson() {
+			var json = window.canvas.toJSON()
+
+			$.ajax({
+				url: 'https://api.github.com/gists',
+				method: 'POST',
+				headers: {
+					Accept: 'application/json'
+				},
+				data: JSON.stringify({
+					description: 'Saved map from Mapbringer (mapbringer.github.io)',
+					public: true,
+					files: {
+						'map.json': {
+							content: json
+						}
+					}
+				}),
+				success: function(result) {
+					window.open(result.url, '_gist')
+				}
+			})
+		}
+
+		function importFromJson() {
+			var json = window.prompt('Paste JSON here:')
+
+			window.canvas.loadFromJson(json, window.canvas.renderAll.bind(window.canvas))
 		}
 	}
 
