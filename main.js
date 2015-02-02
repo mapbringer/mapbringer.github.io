@@ -535,7 +535,7 @@ function init() {
 				value.set('lineType', lineType)
 				value.set('strokeDashArray', strokeDashArray)
 			})
-			
+
 			window.canvas.renderAll()
 		}
 
@@ -587,7 +587,7 @@ function init() {
 
 			$rightPane.find('.path.info').data('obj').set('pathType', pathType)
 			$rightPane.find('.path.info').data('obj').set('strokeDashArray', strokeDashArray)
-			
+
 			window.canvas.renderAll()
 		}
 
@@ -629,6 +629,8 @@ function init() {
 
 			function undoSelection() {
 				window.canvas.deactivateAll()
+				$rightPane.find('.info').hide()
+				$rightPane.find('.general.info').show()
 			}
 
 			function exportSelection() {
