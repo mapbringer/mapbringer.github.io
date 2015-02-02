@@ -1,4 +1,4 @@
-# Mapbringer v0.3.4
+# Mapbringer v0.3.5
 
 First public release. Major initial features are now complete. Still plenty of rough spots but good enough for people to start using. See below for full feature status list.
 
@@ -67,3 +67,4 @@ Special thanks to:
 - the contributors to [A Wiki of Ice and Fire](http://awoiaf.westeros.org/) for making so many maps and sigils available under the [GNU Free Documentation License](http://www.gnu.org/copyleft/fdl.html)
 - the contributors to [fabric.js](https://github.com/kangax/fabric.js/) for making such a great framework
 - [/u/Brenzle](http://www.reddit.com/user/Brenzle) for the encouragment to kick off the project
+- [SerMountainGoat](http://www.sermountaingoat.co.uk/) for making his fantastic world maps available under Creative Commons
