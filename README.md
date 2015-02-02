@@ -1,4 +1,4 @@
-# Mapbringer v0.2.0
+# Mapbringer v0.3.0
 
 First public release. Major initial features are now complete. Still plenty of rough spots but good enough for people to start using. See below for full feature status list.
 
@@ -18,7 +18,7 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 	- [x] Scaling
 	- [x] Deletion
 	- [ ] Copy/paste
-- [ ] Images
+- [x] Images
 	- [x] Background maps
 	- [x] House/character sigils
 	- [ ] User-defined images
@@ -35,8 +35,8 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 	- [x] Dashed/dotted/solid mode
 	- [x] Stroke width
 	- [x] Colors
-	- [ ] Arrows
 	- [x] Group movement
+	- [ ] Arrows
 - [x] Free draw mode
 	- [x] Placement
 	- [x] Dashed/dotted/solid mode
@@ -51,7 +51,7 @@ Mapbringer's goal is to provide a stable platform for fast and intuitive creatio
 	- [x] JSON export
 	- [x] JSON import
 	- [x] imgur export
-		- [ ] Cropped imgur export
+		- [x] Cropped imgur export
 - [ ] Map metadata (name, authors, date, etc)
 
 # Contributing
