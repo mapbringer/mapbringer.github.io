@@ -259,7 +259,7 @@ function init() {
 			var lastPoint = null
 			var linesAndPoints = []
 
-			$('#add-line').addClass('btn-danger disabled').text('Right click to end')
+			$('#add-line').addClass('btn-danger disabled').text('Right click on canvas to end')
 
 			$canvas.on('click', addPoint)
 			$canvas.on('contextmenu', finishLine)
@@ -406,7 +406,7 @@ function init() {
 			window.canvas.isDrawingMode = true
 			window.canvas.freeDrawingMode = 'Pencil'
 
-			$('#draw-path').addClass('btn-danger disabled').text('Right click to end')
+			$('#draw-path').addClass('btn-danger disabled').text('Right click on canvas to end')
 
 			$canvas.on('contextmenu', endPathDraw)
 
@@ -430,7 +430,7 @@ function init() {
 		function addText() {
 			var textStr = 'foo' || window.prompt()
 
-			$('#add-text').addClass('btn-danger disabled').text('Right click to cancel')
+			$('#add-text').addClass('btn-danger disabled').text('Right click on canvas to cancel')
 
 			$canvas.on('click', addTextObject)
 			$canvas.on('contextmenu', endAddText)
@@ -607,7 +607,7 @@ function init() {
 
 		function exportToImgur() {
 			var upperLeft, lowerRight
-			$('#imgur-export').addClass('btn-danger disabled').text('Click upper left (right click to cancel)')
+			$('#imgur-export').addClass('btn-danger disabled').text('Click upper left (right click canvas to cancel)')
 
 			window.canvas.on('mouse:up', logUpperLeft)
 			window.canvas.on('object:selected', undoSelection)
@@ -615,7 +615,7 @@ function init() {
 
 			function logUpperLeft(data) {
 				upperLeft = {x: data.e.offsetX, y: data.e.offsetY}
-				$('#imgur-export').text('Click lower right (right click to cancel)')
+				$('#imgur-export').text('Click lower right (right click canvas to cancel)')
 
 				window.canvas.off('mouse:up', logUpperLeft)
 				window.canvas.on('mouse:up', logLowerRight)

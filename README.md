@@ -1,6 +1,8 @@
-# Mapbringer v0.3.1
+# Mapbringer v0.3.2
 
 First public release. Major initial features are now complete. Still plenty of rough spots but good enough for people to start using. See below for full feature status list.
+
+Minor bugfixes will continue to be released as 0.3.x versions.
 
 # About
 
