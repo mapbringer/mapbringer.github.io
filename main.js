@@ -99,6 +99,14 @@ function init() {
 
 					break
 
+				case 27: // escape
+					// Deselect all elements and force the General Info panel to show
+					window.canvas.deactivateAll()
+					window.canvas.renderAll()
+					$rightPane.find('.info').hide()
+					$rightPane.find('.general.info').show()
+					break
+
 				default:
 					break
 			}
