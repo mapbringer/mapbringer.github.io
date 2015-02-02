@@ -610,6 +610,7 @@ function init() {
 			$('#imgur-export').addClass('btn-danger disabled').text('Click upper left (right click to cancel)')
 
 			window.canvas.on('mouse:up', logUpperLeft)
+			window.canvas.on('object:selected', undoSelection)
 			$canvas.on('contextmenu', exitExportMode)
 
 			function logUpperLeft(data) {
@@ -624,6 +625,10 @@ function init() {
 				lowerRight = {x: data.e.offsetX, y: data.e.offsetY}
 				window.canvas.off('mouse:up', logLowerRight)
 				exportSelection()
+			}
+
+			function undoSelection() {
+				window.canvas.deactivateAll()
 			}
 
 			function exportSelection() {
@@ -663,6 +668,7 @@ function init() {
 				// Clear all event listeners
 				window.canvas.off('mouse:up', logUpperLeft)
 				window.canvas.off('mouse:up', logLowerRight)
+				window.canvas.off('object:selected', undoSelection)
 				$canvas.off('contextmenu', exitExportMode)
 			}
 		}
