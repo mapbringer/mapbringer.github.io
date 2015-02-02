@@ -606,24 +606,65 @@ function init() {
 		}
 
 		function exportToImgur() {
-			var imgData = canvas.toDataURL('png').replace(/.*,/, '')
+			var upperLeft, lowerRight
+			$('#imgur-export').addClass('btn-danger disabled').text('Click upper left (right click to cancel)')
 
-			$.ajax({
-				url: 'https://api.imgur.com/3/image',
-				method: 'POST',
-				headers: {
-					Authorization: 'Client-ID 79642fcadc44981',
-					Accept: 'application/json'
-				},
-				data: {
-					image: imgData,
-					type: 'base64'
-				},
-				success: function(result) {
-					var id = result.data.id
-					window.open('https://imgur.com/gallery/' + id, '_imgur')
-				}
-			})
+			window.canvas.on('mouse:up', logUpperLeft)
+			$canvas.on('contextmenu', exitExportMode)
+
+			function logUpperLeft(data) {
+				upperLeft = {x: data.e.offsetX, y: data.e.offsetY}
+				$('#imgur-export').text('Click lower right (right click to cancel)')
+
+				window.canvas.off('mouse:up', logUpperLeft)
+				window.canvas.on('mouse:up', logLowerRight)
+			}
+
+			function logLowerRight(data) {
+				lowerRight = {x: data.e.offsetX, y: data.e.offsetY}
+				window.canvas.off('mouse:up', logLowerRight)
+				exportSelection()
+			}
+
+			function exportSelection() {
+				$('#imgur-export').text('Exporting...')
+
+				var imgData = canvas.toDataURL({
+					format: 'png',
+					left:   upperLeft.x,
+					top:    upperLeft.y,
+					width:  lowerRight.x - upperLeft.x,
+					height: lowerRight.y - upperLeft.y
+				}).replace(/.*,/, '')
+
+				$.ajax({
+					url: 'https://api.imgur.com/3/image',
+					method: 'POST',
+					headers: {
+						Authorization: 'Client-ID 79642fcadc44981',
+						Accept: 'application/json'
+					},
+					data: {
+						image: imgData,
+						type: 'base64'
+					},
+					success: function(result) {
+						var id = result.data.id
+						window.open('https://imgur.com/gallery/' + id, '_imgur')
+					}
+				})
+
+				exitExportMode()
+			}
+
+			function exitExportMode() {
+				$('#imgur-export').removeClass('btn-danger disabled').text('Export to imgur')
+
+				// Clear all event listeners
+				window.canvas.off('mouse:up', logUpperLeft)
+				window.canvas.off('mouse:up', logLowerRight)
+				$canvas.off('contextmenu', exitExportMode)
+			}
 		}
 
 		function exportToJson() {
